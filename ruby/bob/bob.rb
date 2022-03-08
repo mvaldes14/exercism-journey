@@ -9,15 +9,16 @@ To get started with TDD, see the `README.md` file in your
 class Bob
 
     def self.hey(remark)
+        remark = remark.strip
         case
-        when remark == remark.strip.upcase && remark[-1] != "?" && remark.scan(/[a-zA-Z]/).empty? == false
+        when remark == remark.upcase && remark[-1] != "?" && remark.scan(/[a-zA-Z]/).empty? == false
             'Whoa, chill out!'
-        when remark.strip.end_with?("?")
-            'Sure.'
-        when remark == remark.strip.upcase && remark.end_with?("?")
+        when remark == remark.upcase && remark[-1] == '?' && remark.downcase != remark
              'Calm down, I know what I\'m doing!'
-        when remark.strip.gsub(/\n\r\t/, '').empty?
+        when remark.gsub(/\n\r\t/, '').empty?
             'Fine. Be that way!'
+        when remark[-1] == "?"
+            'Sure.'
         else 
             'Whatever.'
         end
